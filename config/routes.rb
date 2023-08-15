@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'inventories#index'
+  resources :inventories, only: [:show, :index, :create ]
 end
