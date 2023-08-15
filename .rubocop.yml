@@ -10,6 +10,8 @@ AllCops:
     - 'bin/rake'
     - 'bin/setup'
     - 'db/schema.rb'
+    - 'db'
+    - 'app/channels'
     - 'config/initializers/devise.rb'
 
   DisplayCopNames: true
