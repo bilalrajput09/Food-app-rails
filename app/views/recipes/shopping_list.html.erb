@@ -1,0 +1,64 @@
+<header class="d-flex justify-content-center align-items-center">
+     <h1 class="display-4"> <strong>
+        Shopping List
+     </strong></h1>
+</header>
+
+<div class="d-flex justify-content-between mt-4 mb-4 ">
+    <h5 > 
+        <strong>
+            Amount of food to buy:
+        </strong>
+        <%= @missing_foods.count %>
+     </h5>
+
+     <h5 > 
+        <strong>
+            Recipe:
+        </strong>
+        <%= @recipe_obj.name %>
+     </h5>
+
+</div>
+
+<div class="d-flex justify-content-between mt-4 mb-4 ">
+    <h5 > 
+        <strong>
+            Total value of food needed:
+        </strong>
+        $<%= @price%>
+     </h5>
+
+     <h5 > 
+        <strong>
+            Inventory:
+        </strong>
+        <%= @inventory_obj.name%>
+     </h5>
+    
+</div>
+
+<article>
+    <table class="table mb-4 table-striped table-bordered">
+        <thead>
+            <tr>
+            <th scope="col">Serial#</th>
+            <th scope="col">Food</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <% @missing_foods.each_with_index do |missing_food, i| %> 
+                <tr>
+                    <td><%= i+ 1%></td>  
+                    <td><%= missing_food.food.name %></td> 
+                    <td><%= missing_food.quantity %></td> 
+                    <td>$<%= missing_food.food.price %></td> 
+                </tr>
+            <% end %>
+            
+        </tbody>
+    </table>
+</article>

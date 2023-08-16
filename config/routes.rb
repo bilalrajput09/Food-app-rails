@@ -6,4 +6,10 @@ Rails.application.routes.draw do
   resources :inventories, only: %i[show index create] do
     resources :foods, only: %i[new create]
   end
+
+  resources :recipes, only: [:show] do
+    get '/shopping_list', to: 'recipes#shopping_list'
+    get '/toggle_recipes_status', to: 'recipes#toggle_recipes_status'
+    resources :foods, only: %i[new create]
+  end
 end
