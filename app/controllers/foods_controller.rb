@@ -3,6 +3,20 @@ class FoodsController < ApplicationController
 
   def create
     food = Food.new(food_params)
+    if params[:inventory_id]
+      add_food_to_inventory_foods(params, food)
+    else
+      add_food_to_recipe_foods(params, food)
+    end
+  end
+
+  private
+
+  def food_params
+    params.permit(:name, :measurement_unit, :price)
+  end
+
+  def add_food_to_inventory_foods(params, food)
     inventory = Inventory.find(params[:inventory_id])
     inventory_food = InventoryFood.new(quantity: params[:quantity])
     if food.save
@@ -16,9 +30,16 @@ class FoodsController < ApplicationController
     end
   end
 
-  private
+  def add_food_to_recipe_foods(params, food)
+    recipe = Recipe.find(params[:recipe_id])
+    recipe_food = RecipeFood.new(quantity: params[:quantity])
+    if food.save
+      food.recipe_foods << recipe_food
+      recipe.recipe_foods << recipe_food
 
-  def food_params
-    params.permit(:name, :measurement_unit, :price)
+      redirect_to recipe_path(params[:recipe_id])
+    else
+      render 'new'
+    end
   end
 end
