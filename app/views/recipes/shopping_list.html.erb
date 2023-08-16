@@ -26,7 +26,7 @@
         <strong>
             Total value of food needed:
         </strong>
-        $<%= @price%>
+        $<%= @total_price%>
      </h5>
 
      <h5 > 
@@ -55,7 +55,7 @@
                     <td><%= i+ 1%></td>  
                     <td><%= missing_food.food.name %></td> 
                     <td><%= missing_food.quantity %></td> 
-                    <td>$<%= missing_food.food.price %></td> 
+                    <td>$<%= missing_food.food.price * missing_food.quantity %></td> 
                 </tr>
             <% end %>
             

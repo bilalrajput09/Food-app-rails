@@ -13,11 +13,12 @@ class RecipesController < ApplicationController
     @missing_foods = @recipe_obj.recipe_foods.reject do |recipe_food|
       @inventory_foods_ids.include?(recipe_food.food.id)
     end
-    @price = 0
+    @total_price = 0
     @total_value = @missing_foods.each do |missing_food|
-      @price += missing_food.food.price
+      price_multiply_with_qty = missing_food.food.price * missing_food.quantity
+      @total_price += price_multiply_with_qty
     end
-    @price
+    @total_price
   end
 
   def toggle_recipes_status
