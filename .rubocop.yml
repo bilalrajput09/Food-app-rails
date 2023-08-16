@@ -10,8 +10,10 @@ AllCops:
     - 'bin/rake'
     - 'bin/setup'
     - 'db/schema.rb'
-    - 'db'
+    - 'db/migrate'
     - 'app/channels'
+    - 'app/jobs'
+    - 'config/initializers'
     - 'config/initializers/devise.rb'
 
   DisplayCopNames: true

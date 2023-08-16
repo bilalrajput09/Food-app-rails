@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'inventories#index'
   # config/routes.rb
-  resources :inventories
+  resources :inventories do
+    resources :foods, only: %i[new create]
+  end
 end
