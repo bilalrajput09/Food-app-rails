@@ -1,0 +1,34 @@
+<header class="d-flex justify-content-center align-items-center">
+     <h1 class="display-4"> <strong>
+        Inventory 1
+     </strong></h1>
+</header>
+
+<div class="d-flex justify-content-end mt-4 mb-4 border-bottom border-secordary border-3 ">
+    <%= button_to "Add Food", new_inventory_food_path(inventory_id: @inventory.id), class: "btn btn-primary mb-4", method: :get %>
+</div>
+
+<article>
+    <table class="table mb-4 table-striped table-bordered">
+        <thead>
+            <tr>
+            <th scope="col">Serial#</th>
+            <th scope="col">Food</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <% @inventory.inventory_foods.each_with_index do |inventory_food, i| %> 
+                <tr>
+                    <td><%= i+ 1%></td>  
+                    <td><%= inventory_food.food.name %></td> 
+                    <td><%= inventory_food.quantity %></td> 
+                    <td><%= "Actions"%></td> 
+                </tr>
+            <% end %>
+            
+        </tbody>
+    </table>
+</article>

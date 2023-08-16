@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'inventories#index'
-  resources :inventories, only: %i[show index create]
+  resources :inventories, only: %i[show index create] do
+    resources :foods, only: %i[new create]
+  end
 end
