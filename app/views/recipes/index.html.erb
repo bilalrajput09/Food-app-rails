@@ -1,0 +1,19 @@
+<h1>Your Recipes</h1>
+<ul>
+  <% @user_recipes.each do |recipe| %>
+    <li>
+      <%= link_to recipe.name, recipe_path(recipe) %> | 
+      <% if recipe.user == User.first %>
+        <%= link_to "Delete", recipe_path(recipe), method: :delete, data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+<%= link_to "Create New Recipe", new_recipe_path %>
+
+<h1>Public Recipes</h1>
+<ul>
+  <% @public_recipes.each do |recipe| %>
+    <li><%= link_to recipe.name, public_recipe_path(recipe) %></li>
+  <% end %>
+</ul>
