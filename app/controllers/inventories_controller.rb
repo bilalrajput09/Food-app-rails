@@ -5,7 +5,7 @@ class InventoriesController < ApplicationController
     @user = User.first
     @inventories = @user.inventories
   end
-  
+
   def show
     @inventory = Inventory.find(params[:id])
   end
