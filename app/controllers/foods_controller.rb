@@ -1,6 +1,18 @@
 class FoodsController < ApplicationController
   def new; end
 
+  def destroy
+    @inventory = Inventory.find(params[:inventory_id])
+    inventory_food = InventoryFood.find_by(food_id: params[:food_id])
+    recipe_food = RecipeFood.find_by(food_id: params[:food_id])
+    food = Food.find(params[:food_id])
+    if food.destroy && inventory_food.destroy && recipe_food.destroy
+      redirect_to inventory_path(params[:inventory_id])
+    else
+      redirect_to root_path
+    end
+  end
+
   def create
     food = Food.new(food_params)
     if params[:inventory_id]

@@ -11,9 +11,11 @@ class InventoriesController < ApplicationController
   end
 
   def destroy
-    @inventory = Inventory.find(params[:id])
-    # Delete the inventory logic here
-    @inventory.destroy
-    redirect_to inventories_path, notice: 'Inventory was successfully deleted.'
+    inventory_food = InventoryFood.find_by(food_id: params[:food_id])
+    if inventory_food.destroy
+      redirect_to inventory_path(inventory_id: params[:inventory_id])
+    else
+      render 'show'
+    end
   end
 end
