@@ -6,6 +6,7 @@
     </button>
     <div class="collapse navbar-collapse d-flex justify-content-between " id="navbarNav">
       <ul class="navbar-nav">
+        <% if current_user %>
         <li class="nav-item">
           <%= link_to "Recipe List", recipes_path, class: "nav-link"%>
         </li>
@@ -26,11 +27,14 @@
             </li>
           </ul>
       </div>
+      <% end %>
       </ul>
       <ul class="navbar-nav ml-auto">
+        <% if current_user %>
         <li class="nav-item">
           <%= button_to "Logout", destroy_user_session_path, class: "btn btn-danger", method: :delete %>
         </li>
+        <% end %>
       </ul>
     </div>
   </div>
