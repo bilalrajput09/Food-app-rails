@@ -70,7 +70,7 @@
         <%= form_with model: @recipe, url: recipe_shopping_list_path(recipe_id: @recipe.id), method: :get do |f| %>
         <select class="form-select" aria-label="Default select example" name="selected_inventory_id">
             <option selected>Open this select menu</option>
-            <% @recipe.user.inventories.each do |inventory| %>
+            <% @inventories.each do |inventory| %>
                 <option value="<%= inventory.id %>"><%= inventory.name %></option>
             <% end %> 
         </select>
