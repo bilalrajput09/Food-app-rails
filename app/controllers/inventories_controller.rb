@@ -2,8 +2,7 @@ class InventoriesController < ApplicationController
   # before_action :authenticate_user! # Ensure user is logged in
 
   def index
-    @user = User.first
-    @inventories = @user.inventories
+    @inventories = current_user.inventories
   end
 
   def show
@@ -16,6 +15,17 @@ class InventoriesController < ApplicationController
       redirect_to inventory_path(inventory_id: params[:inventory_id])
     else
       render 'show'
+    end
+  end
+
+  def inventory_destroy
+    inventory = Inventory.find(params[:inventory_id])
+    if inventory.destroy
+      flash[:notice] = 'Inventory deleted successfully'
+      redirect_to root_path
+    else
+      flash.now = 'Inventory is not deleted'
+      render 'index'
     end
   end
 end
