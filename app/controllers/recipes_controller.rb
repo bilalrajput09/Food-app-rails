@@ -39,6 +39,7 @@ class RecipesController < ApplicationController
   end
 
   def toggle_recipes_status
+    @inventories = Inventory.all
     @recipe = Recipe.find(params[:recipe_id])
     if params[:recipe][:public] == '1'
       @recipe.update(public: true)
