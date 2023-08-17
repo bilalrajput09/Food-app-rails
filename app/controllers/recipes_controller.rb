@@ -36,7 +36,7 @@ class RecipesController < ApplicationController
   def destroy
     recipe_food = RecipeFood.find_by(food_id: params[:food_id])
     if recipe_food.destroy
-      redirect_to recipe_path(recipe_id: params[:recipe_id])
+      redirect_to recipe_path(id: params[:id])
     else
       render 'show'
     end
