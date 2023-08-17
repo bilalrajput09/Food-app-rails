@@ -1,0 +1,107 @@
+<header class="d-flex justify-content-center align-items-center">
+     <h1 class="display-4"> <strong>
+        <%= @recipe.name %>
+     </strong></h1>
+</header>
+
+<div class="d-flex justify-content-between mt-4 mb-4 ">
+    <h5 > 
+        <strong>
+            Preperation Time:
+        </strong>
+        <%= "1.5" %>
+     </h5>
+
+    <%= form_with model: @recipe, url: recipe_toggle_recipes_status_path(recipe_id: @recipe.id),  method: :get do |f|%>
+      <div class="form-check form-switch">
+        <%= f.check_box :public, class: "form-check-input", id: "flexSwitchCheckChecked" %>
+        <%= f.label :public, class: "form-check-label", for: "flexSwitchCheckChecked"  %>
+      </div>
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    <% end %>
+</div>
+
+<div class="d-flex justify-content-between mt-4 mb-4 ">
+
+    <h5 > 
+        <strong>
+            Cooking Time:
+        </strong>
+        <%= "1.5" %>
+     </h5>
+
+</div>
+
+<div class="d-flex justify-content-between mt-4 mb-4 ">
+
+    <h5 > 
+        <strong>
+            Steps go here...
+        </strong>
+     </h5>
+
+</div>
+
+<div class="d-flex justify-content-between mt-4 mb-4 border-bottom border-secordary border-3 ">
+    <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Generate shopping list
+    </button>
+    <%= button_to "Add ingredient", new_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-primary mb-4", method: :get %>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <strong class="text-center">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Generate Shopping List</h1>
+        </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Choose an inventory to use</p>
+        <%= form_with model: @recipe, url: recipe_shopping_list_path(recipe_id: @recipe.id), method: :get do |f| %>
+        <select class="form-select" aria-label="Default select example" name="selected_inventory_id">
+            <option selected>Open this select menu</option>
+            <% @recipe.user.inventories.each do |inventory| %>
+                <option value="<%= inventory.id %>"><%= inventory.name %></option>
+            <% end %> 
+        </select>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= f.submit "Generate", class: "btn btn-primary"%>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<article>
+    <table class="table mb-4 table-striped table-bordered">
+        <thead>
+            <tr>
+            <th scope="col">Serial#</th>
+            <th scope="col">Food</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Value</th>
+            <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <% @recipe.recipe_foods.each_with_index do |recipe_food, i| %> 
+                <tr>
+                    <td><%= i+ 1%></td>  
+                    <td><%= recipe_food.food.name %></td> 
+                    <td><%= recipe_food.quantity %></td> 
+                    <td><%= recipe_food.food.price %></td> 
+                    <td><%= button_to "Remove", recipe_path(recipe_id: @recipe.id, food_id: recipe_food.food.id ), class: "btn btn-primary mb-4", method: :delete %></td> 
+                </tr>
+            <% end %>
+            
+        </tbody>
+    </table>
+</article>
+
