@@ -17,10 +17,12 @@
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
               <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
+                Create new...
               </button>
               <ul class="dropdown-menu dropdown-menu-light">
-                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li>
+                  <%= link_to "Create inventory", new_inventory_path, class: "dropdown-item" %>
+                </li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
