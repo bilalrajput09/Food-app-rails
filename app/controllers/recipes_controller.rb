@@ -1,4 +1,18 @@
 class RecipesController < ApplicationController
+  def index
+    @recipes = Recipe.all
+  end
+
+  def recipe_destroy
+    recipe = Recipe.find(params[:recipe_id])
+    if recipe.destroy
+      flash[:notice] = 'Recipe deleted successfully'
+      redirect_to recipes_path
+    else
+      flash.now = 'Recipe is not deleted'
+    end
+  end
+
   def show
     @recipe = Recipe.find(params[:id])
     @inventories = Inventory.all
