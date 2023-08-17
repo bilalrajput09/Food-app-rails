@@ -12,10 +12,10 @@ class InventoriesController < ApplicationController
 
   def destroy
     inventory_food = InventoryFood.find_by(food_id: params[:food_id])
-    if inventory_food.destroy 
+    if inventory_food.destroy
       redirect_to inventory_path(inventory_id: params[:inventory_id])
     else
-      render "show"
+      render 'show'
     end
   end
 end
