@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'inventories#index'
   # config/routes.rb
+  delete '/inventory_delete', to: 'inventories#inventory_destroy'
   resources :inventories do
     resources :foods, only: %i[new create destroy]
   end
