@@ -5,12 +5,15 @@ Rails.application.routes.draw do
   root 'inventories#index'
   # config/routes.rb
   resources :inventories do
-    resources :foods, only: %i[new create]
+    resources :foods, only: %i[new create destroy]
   end
 
   resources :recipes, only: [:show] do
     get '/shopping_list', to: 'recipes#shopping_list'
     get '/toggle_recipes_status', to: 'recipes#toggle_recipes_status'
-    resources :foods, only: %i[new create]
+    resources :foods, only: %i[new create destroy]
+    resources :recipe_foods, only: [:destroy]
   end
+
+  
 end
