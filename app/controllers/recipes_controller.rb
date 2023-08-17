@@ -1,5 +1,4 @@
 class RecipesController < ApplicationController
-   
   def index
     @recipes = current_user.recipes
   end
@@ -13,7 +12,7 @@ class RecipesController < ApplicationController
       flash.now = 'Recipe is not deleted'
     end
   end
-  
+
   def show
     @recipe = Recipe.find(params[:id])
   end
