@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-# Defines the root path route ("/")
- root 'inventories#index'
-  resources :inventories, only: %i[show index create] do
-    resources :foods, only: %i[new create]
-  end
 
-  resources :recipes do
-    # member do
-    #   patch :toggle_visibility
-    # end
+  # Defines the root path route ("/")
+  root 'inventories#index'
+  # config/routes.rb
+  delete '/inventory_delete', to: 'inventories#inventory_destroy'
+  resources :inventories do
+    resources :foods, only: %i[new create destroy]
   end
-  get 'public_recipes', to: 'recipes#public_index', as: :public_recipes
+  delete '/recipe_delete', to: 'recipes#recipe_destroy'
+  resources :recipes, only: %i[index show destroy] do
+    get '/shopping_list', to: 'recipes#shopping_list'
+    get '/toggle_recipes_status', to: 'recipes#toggle_recipes_status'
+    resources :foods, only: %i[new create destroy]
+    resources :recipe_foods, only: [:destroy]
+  end
 end

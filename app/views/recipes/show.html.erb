@@ -1,7 +1,0 @@
-<h1><%= @recipe.name %></h1>
-<p><%= @recipe.description %></p>
-
-<% if can_modify_recipe?(@recipe) %>
-  <%= link_to "Edit Recipe", edit_recipe_path(@recipe) %> | 
-  <%= link_to "Delete Recipe", recipe_path(@recipe), method: :delete, data: { confirm: "Are you sure?" } %>
-<% end %>
