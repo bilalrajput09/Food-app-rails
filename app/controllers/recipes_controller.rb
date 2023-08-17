@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   def index
-    @recipes = current_user.recipes
+    @recipes = Recipe.all
   end
 
   def recipe_destroy
@@ -15,6 +15,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @inventories = Inventory.all
   end
 
   def shopping_list
@@ -38,6 +39,7 @@ class RecipesController < ApplicationController
   end
 
   def toggle_recipes_status
+    @inventories = Inventory.all
     @recipe = Recipe.find(params[:recipe_id])
     if params[:recipe][:public] == '1'
       @recipe.update(public: true)
@@ -50,7 +52,7 @@ class RecipesController < ApplicationController
   def destroy
     recipe_food = RecipeFood.find_by(food_id: params[:food_id])
     if recipe_food.destroy
-      redirect_to recipe_path(recipe_id: params[:recipe_id])
+      redirect_to recipe_path(id: params[:id])
     else
       render 'show'
     end

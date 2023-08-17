@@ -9,7 +9,7 @@
         <strong>
             Preperation Time:
         </strong>
-        <%= "1.5" %>
+        <%= @recipe.preparation_time %>
      </h5>
 
     <%= form_with model: @recipe, url: recipe_toggle_recipes_status_path(recipe_id: @recipe.id),  method: :get do |f|%>
@@ -27,7 +27,7 @@
         <strong>
             Cooking Time:
         </strong>
-        <%= "1.5" %>
+        <%= @recipe.cooking_time %>
      </h5>
 
 </div>
@@ -36,17 +36,25 @@
 
     <h5 > 
         <strong>
-            Steps go here...
+            Description:
         </strong>
+        <%= @recipe.description %>
      </h5>
 
 </div>
+
+<% if can?( :manage, @recipe) || @recipe.public %>
 
 <div class="d-flex justify-content-between mt-4 mb-4 border-bottom border-secordary border-3 ">
     <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Generate shopping list
     </button>
-    <%= button_to "Add ingredient", new_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-primary mb-4", method: :get %>
+    <% if can? :manage, @recipe %>
+        <%= button_to "Add ingredient", new_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-primary mb-4", method: :get %>
+
+    <% else %>
+        <%= button_to "Add ingredient", new_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-secondary mb-4 disabled", method: :get %>
+    <% end %>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -63,7 +71,7 @@
         <%= form_with model: @recipe, url: recipe_shopping_list_path(recipe_id: @recipe.id), method: :get do |f| %>
         <select class="form-select" aria-label="Default select example" name="selected_inventory_id">
             <option selected>Open this select menu</option>
-            <% @recipe.user.inventories.each do |inventory| %>
+            <% @inventories.each do |inventory| %>
                 <option value="<%= inventory.id %>"><%= inventory.name %></option>
             <% end %> 
         </select>
@@ -97,7 +105,13 @@
                     <td><%= recipe_food.food.name %></td> 
                     <td><%= recipe_food.quantity %></td> 
                     <td><%= recipe_food.food.price %></td> 
-                    <td><%= button_to "Remove", recipe_path(recipe_id: @recipe.id, food_id: recipe_food.food.id ), class: "btn btn-primary mb-4", method: :delete %></td> 
+                        <td>
+                        <% if can? :manage, @recipe %>
+                            <%= button_to "Remove", recipe_path(id: @recipe.id, food_id: recipe_food.food.id ), class: "btn btn-danger", method: :delete %>
+                        <% else %>
+                            <%= button_to "Inactive", recipe_path(id: @recipe.id, food_id: recipe_food.food.id ), class: "btn btn-secondary disabled", method: :delete %>
+                        <% end %>
+                        </td> 
                 </tr>
             <% end %>
             
@@ -105,3 +119,8 @@
     </table>
 </article>
 
+<% else %>
+
+
+
+<% end %>

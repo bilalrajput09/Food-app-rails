@@ -2,7 +2,7 @@ class InventoriesController < ApplicationController
   # before_action :authenticate_user! # Ensure user is logged in
 
   def index
-    @inventories = current_user.inventories
+    @inventories = Inventory.all
   end
 
   def show

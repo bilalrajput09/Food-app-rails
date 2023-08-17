@@ -1,6 +1,6 @@
 <header class="d-flex justify-content-center align-items-center">
      <h1 class="display-4"> <strong>
-        Inventory 1
+        <%= @inventory.name %>
      </strong></h1>
 </header>
 
@@ -25,7 +25,13 @@
                     <td><%= i+ 1%></td>  
                     <td><%= inventory_food.food.name %></td> 
                     <td><%= inventory_food.quantity %></td> 
-                    <td><%= button_to "Remove", inventory_path(inventory_id: @inventory.id, food_id: inventory_food.food.id ), class: "btn btn-primary mb-4", method: :delete%></td> 
+                    <td>
+                        <% if can? :manage, @inventory %>
+                            <%= button_to "Remove", inventory_path(inventory_id: @inventory.id, food_id: inventory_food.food.id ), class: "btn btn-danger ", method: :delete%>
+                        <% else %>
+                            <%= button_to "Inactive", inventory_path(inventory_id: @inventory.id, food_id: inventory_food.food.id ), class: "btn btn-secondary disabled ", method: :delete%>
+                        <% end %>
+                    </td> 
                 </tr>
             <% end %>
             
