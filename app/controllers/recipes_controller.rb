@@ -7,12 +7,14 @@ class RecipesController < ApplicationController
     @inventory_obj = Inventory.find(params[:selected_inventory_id])
     @recipe_obj = Recipe.find(params[:recipe_id])
 
-    @inventory_foods_ids = @inventory_obj.inventory_foods.pluck(:food_id)
-    # id: 1, 5
+    food_names_from_inventory = @inventory_obj.inventory_foods.map do |inventory_food|
+      inventory_food.food.name.downcase
+    end
 
     @missing_foods = @recipe_obj.recipe_foods.reject do |recipe_food|
-      @inventory_foods_ids.include?(recipe_food.food.id)
+      food_names_from_inventory.include?(recipe_food.food.name.downcase)
     end
+
     @total_price = 0
     @total_value = @missing_foods.each do |missing_food|
       price_multiply_with_qty = missing_food.food.price * missing_food.quantity
