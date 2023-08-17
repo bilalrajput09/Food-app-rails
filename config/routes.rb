@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :foods, only: %i[new create destroy]
   end
 
-  resources :recipes, only: [:show] do
+  resources :recipes, only: [:show, :destroy] do
     get '/shopping_list', to: 'recipes#shopping_list'
     get '/toggle_recipes_status', to: 'recipes#toggle_recipes_status'
     resources :foods, only: %i[new create destroy]

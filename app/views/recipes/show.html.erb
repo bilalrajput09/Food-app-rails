@@ -97,7 +97,7 @@
                     <td><%= recipe_food.food.name %></td> 
                     <td><%= recipe_food.quantity %></td> 
                     <td><%= recipe_food.food.price %></td> 
-                    <td><%= "Remove" %></td> 
+                    <td><%= button_to "Remove", recipe_path(recipe_id: @recipe.id), class: "btn btn-primary mb-4", method: :delete %></td> 
                 </tr>
             <% end %>
             

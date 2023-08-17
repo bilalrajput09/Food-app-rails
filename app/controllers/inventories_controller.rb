@@ -15,7 +15,7 @@ class InventoriesController < ApplicationController
     if inventory_food.destroy 
       redirect_to inventory_path(inventory_id: params[:inventory_id])
     else
-      redirect_to render "show"
+      render "show"
     end
   end
 end
