@@ -27,9 +27,9 @@
                     <td><%= inventory_food.quantity %></td> 
                     <td>
                         <% if can? :manage, @inventory %>
-                            <%= button_to "Remove", inventory_path(inventory_id: @inventory.id, food_id: inventory_food.food.id ), class: "btn btn-danger mb-4", method: :delete%>
+                            <%= button_to "Remove", inventory_path(inventory_id: @inventory.id, food_id: inventory_food.food.id ), class: "btn btn-danger ", method: :delete%>
                         <% else %>
-                            <%= button_to "Inactive", inventory_path(inventory_id: @inventory.id, food_id: inventory_food.food.id ), class: "btn btn-secondary disabled mb-4", method: :delete%>
+                            <%= button_to "Inactive", inventory_path(inventory_id: @inventory.id, food_id: inventory_food.food.id ), class: "btn btn-secondary disabled ", method: :delete%>
                         <% end %>
                     </td> 
                 </tr>

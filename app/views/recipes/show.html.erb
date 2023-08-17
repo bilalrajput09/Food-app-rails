@@ -107,9 +107,9 @@
                     <td><%= recipe_food.food.price %></td> 
                         <td>
                         <% if can? :manage, @recipe %>
-                            <%= button_to "Remove", recipe_path(id: @recipe.id, food_id: recipe_food.food.id ), class: "btn btn-danger mb-4", method: :delete %>
+                            <%= button_to "Remove", recipe_path(id: @recipe.id, food_id: recipe_food.food.id ), class: "btn btn-danger", method: :delete %>
                         <% else %>
-                            <%= button_to "Inactive", recipe_path(id: @recipe.id, food_id: recipe_food.food.id ), class: "btn btn-secondary disabled mb-4", method: :delete %>
+                            <%= button_to "Inactive", recipe_path(id: @recipe.id, food_id: recipe_food.food.id ), class: "btn btn-secondary disabled", method: :delete %>
                         <% end %>
                         </td> 
                 </tr>
