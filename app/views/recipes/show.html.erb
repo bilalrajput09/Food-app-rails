@@ -9,7 +9,7 @@
         <strong>
             Preperation Time:
         </strong>
-        <%= "1.5" %>
+        <%= @recipe.preparation_time %>
      </h5>
 
     <%= form_with model: @recipe, url: recipe_toggle_recipes_status_path(recipe_id: @recipe.id),  method: :get do |f|%>
@@ -27,7 +27,7 @@
         <strong>
             Cooking Time:
         </strong>
-        <%= "1.5" %>
+        <%= @recipe.cooking_time %>
      </h5>
 
 </div>
@@ -36,8 +36,9 @@
 
     <h5 > 
         <strong>
-            Steps go here...
+            Description:
         </strong>
+        <%= @recipe.description %>
      </h5>
 
 </div>
