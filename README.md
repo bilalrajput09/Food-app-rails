@@ -27,7 +27,9 @@
 
 # [Food App] <a name="about-project"></a>
 
-**[Food App]** The Food app will be a classic example of a Food App. It is a functional website that will show the list of shopping and empower readers to interact with them by adding recipes and inventories and generating shopping list.
+**[Food App]** The Food app will be a classic example of a Food App. It is a functional website that will show the list of shopping and empower readers to interact with them by adding recipes and inventories and generating shopping list.It has been made by the following ERD diagram.
+
+![ERD diagram](image-1.png)
 
 ## Built With <a name="built-with"></a>
 
