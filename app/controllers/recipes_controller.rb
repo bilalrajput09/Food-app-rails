@@ -65,6 +65,11 @@ class RecipesController < ApplicationController
     render 'show'
   end
 
+  def public_recipes
+    @recipes = Recipe.all
+    @public_recipes = @recipes.select(&:public)
+  end
+
   def destroy
     recipe_food = RecipeFood.find_by(food_id: params[:food_id])
     if recipe_food.destroy
