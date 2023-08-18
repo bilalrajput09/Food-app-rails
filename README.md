@@ -27,7 +27,7 @@
 
 # [Food App] <a name="about-project"></a>
 
-**[Food App]** The Food app will be a classic example of a Food App. It is a functional website that will show the list of shopping and empower readers to interact with them by adding recipes and inventories and generating shopping list. It has been made by the following ERD diagram.
+**[Food App]** The Food app will be a classic example of a Food App. It is a functional website that will show the list of shopping and empower readers to interact with them by adding recipes and inventories and generating shopping list.
 
 ## Built With <a name="built-with"></a>
 
@@ -48,14 +48,11 @@
  - [ ] **[Processing data in models]**
  - [ ] **[Validations and Model specs]**
  - [ ] **[Setup and controllers]**
- - [ ] **[Controllers specs]**
  - [ ] **[Views]**
  - [ ] **[Forms]**
  - [ ] **[Integration specs for Views and fixing n+1 problems]**
  - [ ] **[Add Devise]**
  - [ ] **[Add authorization rules]**
- - [ ] **[Add API endpoints]**
- - [ ] **[API documentation]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -135,33 +132,34 @@ To run tests, run the following command:
 
 <!-- CONTRIBUTING -->
 
-## Contributing <a name="contributing"></a>
+## 🤝 Contributing <a name="contributing"></a>
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the issues.
+Feel free to check the [issues page](../../issues/).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- SUPPORT -->
 
-## Show your support <a name="support"></a>
+## ⭐ Show your support <a name="support"></a>
 
-If you like this project please show support by staring ￼.
+Give a ⭐ if you like this project
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGEMENTS -->
 
-## Acknowledgments <a name="acknowledgements"></a>
+## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-* We would like to thank our Microverse team and our coding partners for their support and guidance.
+I would like to thank...
+- Microverse for the detailed requerements provided.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 
-## License <a name="license"></a>
+## 📝 License <a name="license"></a>
 
 This project is [MIT](./license) licensed.
 
