@@ -32,9 +32,9 @@ class FoodsController < ApplicationController
     inventory = Inventory.find(params[:inventory_id])
     inventory_food = InventoryFood.new(quantity: params[:quantity])
     if food.save
-
       food.inventory_foods << inventory_food
       inventory.inventory_foods << inventory_food
+      food.reload # Preload associations
 
       redirect_to inventory_path(params[:inventory_id])
     else
@@ -48,6 +48,7 @@ class FoodsController < ApplicationController
     if food.save
       food.recipe_foods << recipe_food
       recipe.recipe_foods << recipe_food
+      food.reload # Preload associations
 
       redirect_to recipe_path(params[:recipe_id])
     else

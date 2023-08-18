@@ -30,13 +30,13 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.includes(recipe_foods: :food).find(params[:id])
     @inventories = Inventory.all
   end
 
   def shopping_list
     @inventory_obj = Inventory.find(params[:selected_inventory_id])
-    @recipe_obj = Recipe.find(params[:recipe][:recipe_id])
+    @recipe_obj = Recipe.includes(recipe_foods: :food).find(params[:recipe][:recipe_id])
 
     food_names_from_inventory = @inventory_obj.inventory_foods.map do |inventory_food|
       inventory_food.food.name.downcase
@@ -67,7 +67,7 @@ class RecipesController < ApplicationController
 
   def public_recipes
     @recipes = Recipe.all
-    @public_recipes = @recipes.select(&:public)
+    @public_recipes = Recipe.includes(:recipe_foods, recipe_foods: :food).where(public: true)
   end
 
   def destroy
