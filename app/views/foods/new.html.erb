@@ -1,0 +1,33 @@
+<header class="d-flex justify-content-center align-items-center">
+     <h1 class="display-4"> <strong>
+        Add Food
+     </strong></h1>
+</header>
+
+<% url =  params[:inventory_id] ? inventory_foods_path : recipe_foods_path %>
+
+<%= form_with model: @food, url: url , method: :post, html: { class: "d-flex justify-content-center align-items-center flex-column mt-4"} do |f| %>
+
+    <div class="form-group col-lg-6">
+        <%= f.label :Name %>
+        <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="form-group col-sm-6">
+        <%= f.label "Measurement Unit" %>
+        <%= f.text_field :measurement_unit, class: "form-control"  %>
+    </div>
+
+    <div class="form-group col-sm-6">
+        <%= f.label "Quantity" %>
+        <%= f.text_field :quantity, class: "form-control"  %>
+    </div>
+
+    <div class="form-group col-sm-6">
+        <%= f.label :Price %>
+        <%= f.number_field :price, class: "form-control"  %>
+    </div>
+
+
+    <%= f.submit "Add Food", class: "btn btn-primary mt-4"%>
+<% end %>

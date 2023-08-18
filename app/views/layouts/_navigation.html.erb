@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid container">
+    <%= link_to "Foodie", root_path, class: "navbar-brand"%>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-between " id="navbarNav">
+      <ul class="navbar-nav">
+        <% if current_user %>
+        <li class="nav-item">
+          <%= link_to "Recipe List", recipes_path, class: "nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Public Recipes",  public_recipes_path, class: "nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Inventory List",  inventories_path, class: "nav-link"%>
+        </li>
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Create new...
+              </button>
+              <ul class="dropdown-menu dropdown-menu-light">
+                <li>
+                  <%= link_to "Create inventory", new_inventory_path, class: "dropdown-item" %>
+                </li>
+                <li>
+                  <%= link_to "Create recipe", new_recipe_path, class: "dropdown-item" %>
+                  </li>
+              </ul>
+            </li>
+          </ul>
+      </div>
+      <% end %>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <% if current_user %>
+        <li class="nav-item mr-4">
+          <%= button_to "Logout", destroy_user_session_path, class: "btn btn-danger", method: :delete %>
+        </li>
+
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <button class="btn dropdown-toggle navbar-brand" data-bs-toggle="dropdown" aria-expanded="false">
+                <%= current_user.name %>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-light">
+                <li>
+                  <%= link_to "View profile", root_path, class: "dropdown-item" %>
+                </li>
+                <li>
+                  <%= link_to "Edit profile", root_path, class: "dropdown-item" %>
+                  </li>
+              </ul>
+            </li>
+          </ul>
+      </div>
+          
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

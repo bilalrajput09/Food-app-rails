@@ -1,0 +1,36 @@
+<header class="d-flex justify-content-center align-items-center">
+     <h1 class="display-4"> <strong>
+        Create Recipe
+     </strong></h1>
+</header>
+
+
+<%= form_with model: @recipe, url: recipes_path, method: :post, html: { class: "d-flex justify-content-center align-items-center flex-column mt-4"} do |f| %>
+
+    <div class="form-group col-lg-6">
+        <%= f.label :Name %>
+        <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="form-group col-sm-6">
+        <%= f.label "Prepartion Time" %>
+        <%= f.text_field :preparation_time, class: "form-control"  %>
+    </div>
+
+    <div class="form-group col-sm-6">
+        <%= f.label "Cooking Time" %>
+        <%= f.text_field :cooking_time, class: "form-control"  %>
+    </div>
+
+    <div class="form-group col-sm-6">
+        <%= f.label "Description" %>
+        <%= f.text_area :description, class: "form-control"  %>
+    </div>
+
+    <div class="form-group col-sm-6">
+        <%= f.check_box :public, class: "form-check-input", id: "flexSwitchCheckChecked" %>
+        <%= f.label :public, class: "form-check-label", for: "flexSwitchCheckChecked"  %>
+    </div>
+
+    <%= f.submit "Add Food", class: "btn btn-primary mt-4"%>
+<% end %>

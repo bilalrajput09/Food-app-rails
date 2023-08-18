@@ -1,0 +1,15 @@
+<header class="d-flex justify-content-center align-items-center">
+     <h1 class="display-4"> <strong>
+        Create Inventory
+     </strong></h1>
+</header>
+
+<%= form_with model: @inventory, url: inventories_path, method: :post, html: { class: "d-flex justify-content-center align-items-center flex-column mt-5 mb-5"} do |f| %>
+
+    <div class="form-group col-lg-6">
+        <%= f.label :Name %>
+        <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <%= f.submit "Add", class: "btn btn-primary mt-4"%>
+<% end %>
