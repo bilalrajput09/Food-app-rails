@@ -3,24 +3,19 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all
   end
 
-  def new
-  end
+  def new; end
 
   def create
-    byebug
-    recipe = Recipe.new(name: params[:name], preparation_time: params[:preparation_time], cooking_time: params[:cooking_time], description: params[:description])
+    recipe = Recipe.new(name: params[:name], preparation_time: params[:preparation_time],
+                        cooking_time: params[:cooking_time], description: params[:description])
 
-    if params[:public] == "1"
-      recipe.public = true
+    recipe.public = params[:public] == '1'
+    if current_user.recipes << recipe
+      flash[:notice] = 'Recipe created successfully'
+      redirect_to recipes_path
     else
-      recipe.public = false 
-    end
-    if current_user.recipes << recipe 
-      flash[:notice] = "Recipe created successfully"
-      redirect_to recipes_path 
-    else
-      flash.now = "Recipe is not created try again!"
-      render "new"
+      flash.now = 'Recipe is not created try again!'
+      render 'new'
     end
   end
 
