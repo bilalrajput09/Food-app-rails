@@ -4,7 +4,7 @@ FactoryBot.define do
     name { Faker::Food.dish }
     preparation_time { "#{Faker::Number.between(from: 5, to: 60)} minutes" }
     cooking_time { "#{Faker::Number.between(from: 10, to: 120)} minutes" }
-    description { Faker::Lorem.sentence }
+    description { Faker::Lorem.paragraph }
     public { true }
     association :user
   end

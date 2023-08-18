@@ -1,7 +1,7 @@
 # spec/factories/inventories.rb
 FactoryBot.define do
   factory :inventory do
-    name { Faker::Commerce.unique.department }
+    name { Faker::Lorem.word }
     association :user
   end
 end

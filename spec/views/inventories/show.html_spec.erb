@@ -1,0 +1,37 @@
+require 'rails_helper'
+
+RSpec.describe 'inventories/show.html.erb', type: :view do
+  let(:user) { create(:user) } # Assuming you have a User factory
+
+  before do
+    allow(view).to receive(:can?).and_return(true) # Assume user can manage inventory
+    inventory = FactoryBot.build_stubbed(:inventory, id: 1, name: 'Inventory 1')
+    inventory_food = FactoryBot.build_stubbed(:inventory_food,
+                                              food: FactoryBot.build_stubbed(:food, name: 'Food Item'),
+                                              quantity: 10,
+                                              id: 1)  # Set the inventory_food id
+    allow(inventory).to receive(:inventory_foods).and_return([inventory_food])
+    assign(:inventory, inventory)
+    render
+  end
+
+  it 'displays the inventory details' do
+    expect(rendered).to have_selector('h1.display-4', text: 'Inventory 1')
+
+    expect(rendered).to have_selector('form[method="get"][action="/inventory_foods/new?inventory_id=1"]')
+    expect(rendered).to have_selector('input[type="submit"][value="Add Food"].btn.btn-primary.mb-4')
+
+    expect(rendered).to have_selector('table.table.mb-4.table-striped.table-bordered')
+    expect(rendered).to have_selector('thead th', text: 'Serial#')
+    expect(rendered).to have_selector('thead th', text: 'Food')
+    expect(rendered).to have_selector('thead th', text: 'Quantity')
+    expect(rendered).to have_selector('thead th', text: 'Actions')
+
+    expect(rendered).to have_selector('tbody tr', count: 1)
+    expect(rendered).to have_selector('tbody td', text: '1')
+    expect(rendered).to have_selector('tbody td', text: 'Food Item')
+    expect(rendered).to have_selector('tbody td', text: '10')
+    expect(rendered).to have_selector("tbody td form[method='delete'][action='/inventories/1/inventory_foods/1'] input[type='hidden'][name='_method'][value='delete']")
+    expect(rendered).to have_selector('tbody td form[method="post"] input[type="submit"][value="Remove"]')
+  end
+end
