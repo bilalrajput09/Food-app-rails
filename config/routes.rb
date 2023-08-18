@@ -9,11 +9,13 @@ Rails.application.routes.draw do
   resources :inventories do
     resources :foods, only: %i[new create destroy]
   end
+
   delete '/recipe_delete', to: 'recipes#recipe_destroy'
-  resources :recipes, only: %i[index show destroy] do
-    get '/shopping_list', to: 'recipes#shopping_list'
+  get '/public_recipes', to: 'recipes#public_recipes'
+  resources :recipes, only: %i[index show destroy new create] do
     get '/toggle_recipes_status', to: 'recipes#toggle_recipes_status'
     resources :foods, only: %i[new create destroy]
     resources :recipe_foods, only: [:destroy]
   end
+  get '/shopping_list', to: 'recipes#shopping_list', as: 'shopping_list'
 end

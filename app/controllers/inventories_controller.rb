@@ -5,6 +5,20 @@ class InventoriesController < ApplicationController
     @inventories = Inventory.all
   end
 
+  def new; end
+
+  def create
+    inventory = Inventory.new(name: params[:name])
+
+    if current_user.inventories << inventory
+      flash[:notice] = 'The inventory is created successfully'
+      redirect_to root_path
+    else
+      flash.now = 'The inventory has not created'
+      render 'new'
+    end
+  end
+
   def show
     @inventory = Inventory.find(params[:id])
   end

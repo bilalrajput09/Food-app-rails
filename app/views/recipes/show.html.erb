@@ -68,18 +68,18 @@
       </div>
       <div class="modal-body">
         <p>Choose an inventory to use</p>
-        <%= form_with model: @recipe, url: recipe_shopping_list_path(recipe_id: @recipe.id), method: :get do |f| %>
+        <%= form_with model: @recipe, url: shopping_list_path, method: :get do |f| %>
         <select class="form-select" aria-label="Default select example" name="selected_inventory_id">
             <option selected>Open this select menu</option>
             <% @inventories.each do |inventory| %>
                 <option value="<%= inventory.id %>"><%= inventory.name %></option>
             <% end %> 
         </select>
-        
+        <%= f.hidden_field :recipe_id, value: @recipe.id %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <%= f.submit "Generate", class: "btn btn-primary"%>
+        <%= f.submit "Generate", class: "btn btn-primary" %>
       </div>
       <% end %>
     </div>

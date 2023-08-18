@@ -3,6 +3,22 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all
   end
 
+  def new; end
+
+  def create
+    recipe = Recipe.new(name: params[:name], preparation_time: params[:preparation_time],
+                        cooking_time: params[:cooking_time], description: params[:description])
+
+    recipe.public = params[:public] == '1'
+    if current_user.recipes << recipe
+      flash[:notice] = 'Recipe created successfully'
+      redirect_to recipes_path
+    else
+      flash.now = 'Recipe is not created try again!'
+      render 'new'
+    end
+  end
+
   def recipe_destroy
     recipe = Recipe.find(params[:recipe_id])
     if recipe.destroy
@@ -20,7 +36,7 @@ class RecipesController < ApplicationController
 
   def shopping_list
     @inventory_obj = Inventory.find(params[:selected_inventory_id])
-    @recipe_obj = Recipe.find(params[:recipe_id])
+    @recipe_obj = Recipe.find(params[:recipe][:recipe_id])
 
     food_names_from_inventory = @inventory_obj.inventory_foods.map do |inventory_food|
       inventory_food.food.name.downcase
@@ -47,6 +63,11 @@ class RecipesController < ApplicationController
       @recipe.update(public: false)
     end
     render 'show'
+  end
+
+  def public_recipes
+    @recipes = Recipe.all
+    @public_recipes = @recipes.select(&:public)
   end
 
   def destroy
