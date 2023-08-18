@@ -5,7 +5,7 @@
       <div style="width: 40%;">
         <h5 class="card-title"><a href="<%= recipe_path(recipe) %>" class="text-decoration-none text-uppercase font-weight-bold"><%= recipe.name %></a></h5>
           <% if can? :manage, recipe %>
-            <%= button_to "REMOVE", recipe_delete_path(recipe_id: recipe.id), method: :delete, data: { turbo_confirm: "Are you sure? "}, class: "text-decoration-none text-danger", class: "btn btn-danger" %>
+          <%= button_to "REMOVE", recipe_delete_path(recipe_id: recipe.id), method: :delete, data: { turbo_confirm: "Are you sure? "}, class: "text-decoration-none text-danger btn btn-danger" %>
           <% else %>
             <%= button_to "Inactive", root_path, class: "btn btn-secondary disabled", method: :delete%>
           <% end %>

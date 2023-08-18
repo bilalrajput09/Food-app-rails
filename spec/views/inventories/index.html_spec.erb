@@ -1,0 +1,28 @@
+require 'rails_helper'
+
+RSpec.describe 'inventories/index.html.erb', type: :view do
+  let(:user) { create(:user) } # Assuming you have a User factory
+  let(:inventories) do
+    [
+      FactoryBot.build_stubbed(:inventory, id: 1, name: 'Inventory 1'),
+      FactoryBot.build_stubbed(:inventory, id: 2, name: 'Inventory 2')
+    ]
+  end
+
+  before do
+    allow(view).to receive(:can?).and_return(true) # Assume user can manage inventory
+    assign(:inventories, inventories)
+    render
+  end
+
+  it 'displays a list of inventories' do
+    expect(rendered).to have_selector('h1.text-center', text: 'Inventories list')
+
+    inventories.each do |inventory|
+      expect(rendered).to have_selector('h5.card-title a', text: inventory.name)
+      expect(rendered).to have_selector('p.text-dark', text: 'Some quick example text')
+      expect(rendered).to have_selector("form[action='#{inventory_delete_path(inventory_id: inventory.id)}'][method='post']")
+      expect(rendered).to have_selector("input[type='submit'][value='REMOVE']")
+    end
+  end
+end
