@@ -68,7 +68,7 @@
       </div>
       <div class="modal-body">
         <p>Choose an inventory to use</p>
-        <%= form_with model: @recipe, url: recipe_shopping_list_path(recipe_id: @recipe.id), method: :get do |f| %>
+        <%= form_with model: @recipe, url: recipe_shopping_list_path(recipe_id: @recipe.id), method: :post do |f| %>
         <select class="form-select" aria-label="Default select example" name="selected_inventory_id">
             <option selected>Open this select menu</option>
             <% @inventories.each do |inventory| %>

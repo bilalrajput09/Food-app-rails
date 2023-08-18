@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   delete '/recipe_delete', to: 'recipes#recipe_destroy'
   get '/public_recipes', to: 'recipes#public_recipes'
   resources :recipes, only: %i[index show destroy new create] do
-    get '/shopping_list', to: 'recipes#shopping_list'
+    post '/shopping_list', to: 'recipes#shopping_list'
     get '/toggle_recipes_status', to: 'recipes#toggle_recipes_status'
     resources :foods, only: %i[new create destroy]
     resources :recipe_foods, only: [:destroy]
