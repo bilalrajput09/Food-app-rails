@@ -4,7 +4,8 @@ require 'rails_helper'
 RSpec.describe 'recipes/show.html.erb', type: :view do
   include Devise::Test::ControllerHelpers
   before do
-    @recipe = FactoryBot.build_stubbed(:recipe, name: 'Recipe 1', preparation_time: '30 minutes', cooking_time: '45 minutes', description: 'Description 1', public: true)
+    @recipe = FactoryBot.build_stubbed(:recipe, name: 'Recipe 1', preparation_time: '30 minutes',
+                                                cooking_time: '45 minutes', description: 'Description 1', public: true)
     recipe_food = FactoryBot.build_stubbed(:recipe_food,
                                            food: FactoryBot.build_stubbed(:food, name: 'Food Item', price: 10),
                                            quantity: 2)
@@ -23,7 +24,8 @@ RSpec.describe 'recipes/show.html.erb', type: :view do
     expect(rendered).to have_selector('h5', text: 'Cooking Time:')
     expect(rendered).to have_selector('h5', text: 'Description:')
 
-    expect(rendered).to have_selector('button[type="button"][data-bs-toggle="modal"][data-bs-target="#exampleModal"]', text: 'Generate shopping list')
+    expect(rendered).to have_selector('button[type="button"][data-bs-toggle="modal"][data-bs-target="#exampleModal"]',
+                                      text: 'Generate shopping list')
 
     expect(rendered).to have_selector('div.modal-dialog')
     expect(rendered).to have_selector('select.form-select')
